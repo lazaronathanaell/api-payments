@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS payments (
   buyer_name VARCHAR(100) NOT NULL,
   buyer_email VARCHAR(100) NOT NULL,
   card_encrypted_data TEXT,
-  status ENUM('pending', 'paid', 'refunded') DEFAULT 'pending',
+  status ENUM('paid', 'partially_refunded', 'refunded') DEFAULT 'paid',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -29,15 +29,6 @@ CREATE TABLE IF NOT EXISTS refunds (
   payment_id INT NOT NULL,
   refund_type ENUM('total', 'partial') NOT NULL,
   amount DECIMAL(10,2) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (payment_id) REFERENCES payments(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS payment_history (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  payment_id INT NOT NULL,
-  action ENUM('created', 'paid', 'refund_requested', 'refunded', 'partial_refund') NOT NULL,
-  description TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (payment_id) REFERENCES payments(id) ON DELETE CASCADE
 );
