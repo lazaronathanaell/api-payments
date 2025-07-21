@@ -1,4 +1,3 @@
-// src/infra/gateway/fake-payments-gateway.ts
 export function fakeEncrypt(data: string): string {
   // simples base64 só pra simular
   return Buffer.from(data).toString('base64')
