@@ -1,6 +1,6 @@
 // src/usecase/create-payment.ts
 import { processPayment } from '../infra/gateway/fake-payment-gateway'
-import { insertPayment } from '../infra/repositories/payment-repository'
+import { insertPayment } from '../infra/repositories/payment/payment-repository'
 
 interface CreatePaymentInput {
   method: 'pix' | 'credit_card'
