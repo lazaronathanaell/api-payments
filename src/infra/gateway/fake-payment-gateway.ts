@@ -8,10 +8,22 @@ export function fakeDecrypt(encrypted: string): string {
 }
 
 // Simula processamento de pagamento e retorna um status
-export async function processPayment(method: 'pix' | 'credit_card', amount: number) {
-  // Só pra simular, aceita tudo e retorna 'paid'
-  return {
-    status: 'paid',
-    transactionId: 'tx_' + Math.random().toString(36).slice(2),
+export function processPayment({
+  method,
+  amount,
+  encryptedCardData,
+}: {
+  method: 'pix' | 'credit_card';
+  amount: number;
+  encryptedCardData?: string;
+}) {
+  if (method === 'credit_card') {
+    const decrypted = fakeDecrypt(encryptedCardData!); // simula descriptografia interna
+    console.log('Processando com cartão:', decrypted);
   }
+
+  return Promise.resolve({
+    status: 'paid',
+    transactionId: 'fake_tx_' + Math.floor(Math.random() * 10000),
+  });
 }

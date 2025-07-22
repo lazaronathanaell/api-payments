@@ -1,7 +1,7 @@
 import { db } from '../../db/db-connection'
-import { PaymentDTO } from './payment-dto'
+import { CreatePaymentDTO, PaymentDTO} from './payment-dto'
 
-export async function insertPayment(payment: PaymentDTO) {
+export async function insertPayment(payment: CreatePaymentDTO) {
   const sql = `
     INSERT INTO payments (method, amount, buyer_name, buyer_email, card_encrypted_data, status)
     VALUES (?, ?, ?, ?, ?, ?)
@@ -20,7 +20,7 @@ export async function insertPayment(payment: PaymentDTO) {
 
 export async function selectPaymentById(id: number) {
   const sql = `
-    SELECT method, amount, buyer_name, buyer_email, card_encrypted_data, status
+    SELECT id, method, amount, buyer_name, buyer_email, card_encrypted_data, status
     FROM payments
     WHERE id = ?
   `
@@ -32,6 +32,7 @@ export async function selectPaymentById(id: number) {
   const row = rows[0]
 
   const payment: PaymentDTO = {
+    id: row.id,
     method: row.method,
     amount: row.amount,
     buyerName: row.buyer_name,
