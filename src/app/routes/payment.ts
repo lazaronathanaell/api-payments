@@ -69,7 +69,7 @@ export default async function paymentRoutes(app: FastifyInstance) {
 
       const { method, amount, buyer, card } = parsed.data
 
-      if (method === 'credit_card' && (!card || !card.encryptedData)) {
+      if (method === 'credit_card' && (!card || !card.encryptedData || card.encryptedData.length < 10)) {
         return reply.status(400).send({ error: 'encryptedData é obrigatório para pagamento com cartão' })
       }
 
