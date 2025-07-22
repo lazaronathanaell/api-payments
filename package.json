@@ -4,9 +4,9 @@
   "description": "Desafio prático para criação de uma API RESTful com integração a um gateway de pagamento simulado, seguindo princípios de Clean Architecture, segurança e boas práticas de desenvolvimento.",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx src/main.ts",
+    "dev": "ts-node-dev main.ts",
     "build": "tsc",
-    "start": "node dist/main.js",
+    "start": "npm run build && node dist/main.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "init-db": "tsx scripts-create-db/init-db.ts"

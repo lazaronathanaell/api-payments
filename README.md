@@ -64,11 +64,22 @@ tests/                   # Testes automatizados
    ```
 
 ---
+## 🧪 Modo Desenvolvedor
 
-## 🧪 Executando os Testes
+```bash
+npm run dev
+```
+
+## 🚀 Inicializando o Servidor (modo produção)
 
 ```bash
 npm test
+```
+
+## 🧪 Inicalizando o Servidor
+
+```bash
+npm start
 ```
 
 ---
