@@ -19,15 +19,6 @@ export default async function paymentRoutes(app: FastifyInstance) {
       .optional(),
   })
 
-  /**
-   * @swagger
-   * @route POST /payments
-   * @group Pagamentos
-   * @summary Cria um novo pagamento (PIX ou Cartão de Crédito)
-   * @param {object} request.body.required - Dados do pagamento
-   * @returns {object} 201 - Pagamento criado com sucesso
-   * @returns {object} 400 - Dados inválidos
-   */
   app.post(
     '/payments',
     {
