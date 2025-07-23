@@ -5,6 +5,7 @@ import { RefundDTO } from '../infra/repositories/refund/refund-dto'
 
 /**
  * Cria um reembolso (total ou parcial) para um pagamento existente.
+ * Se `input.amount` não for fornecido, será considerado reembolso total do valor restante.
  * Não há limite de solicitações, desde que o valor total reembolsado
  * não ultrapasse o valor do pagamento original.
  */
@@ -22,7 +23,13 @@ export async function createRefund(input: RefundDTO) {
   const totalAlreadyRefunded = await selectTotalRefundsByPaymentId(input.payment_id)
   const valorRestante = payment.amount - totalAlreadyRefunded
 
-  if (input.amount > valorRestante) {
+  // Se amount não for fornecido ou for inválido (ex: Infinity), usa o valor restante
+  const valorSolicitado =
+    typeof input.amount === 'number' && Number.isFinite(input.amount)
+      ? input.amount
+      : valorRestante
+
+  if (valorSolicitado > valorRestante) {
     throw new Error(`Valor do reembolso excede o restante disponível. Disponível: ${valorRestante.toFixed(2)}`)
   }
 
