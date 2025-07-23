@@ -131,3 +131,12 @@ npm start
 - Clean Architecture simplificada
 - Separação entre domínio, infraestrutura e aplicação
 - Tipagem forte com TypeScript e validação com Zod
+
+---
+
+### ⚠️ Observação
+
+Por limitações de desempenho da minha máquina, o banco de dados **não foi containerizado com Docker**.  
+O MySQL foi configurado e executado localmente.  
+Se desejar rodar o projeto, certifique-se de ter uma instância do MySQL rodando e devidamente configurada de acordo com o arquivo `.env`.
+
